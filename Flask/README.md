@@ -42,6 +42,15 @@ This does the following things:
 2. it activates the automatic reloader
 3. it enables the debug mode on the Flask application.
 
+## Project Structure 
+
+```
+/application.py 
+/templates
+    /index.html
+/static
+    /style.css
+```
 
 ## Framework Basics
 
@@ -55,7 +64,7 @@ def index():
     return 'Index Page'
 ~~~~
 
-### unique routes
+### Unique routes
 
 ~~~~{.python}
 @app.route('/projects/') # this is a decorator, A reference to a function "func" or a class "C" is passed to a decorator and the decorator returns a modified function or class
@@ -66,11 +75,12 @@ def projects():
 def about():
     return 'The about page'
 ```
+~~~~
 
 
-### dynamic routes
+### Dynamic routes
 
-```
+~~~~{.python}
 # (default) accepts any text without a slash
 @app.route('/user/<username>')
 def show_username(username):
@@ -86,6 +96,54 @@ def show_post(post_id):
 
 # similar types : float, path, uuid
 ~~~~
+
+
+## HTTP Methods
+
+~~~~{.python}
+
+@app.route('/',methods=['GET'])
+def index():
+    return 'Index Page'
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        return 'POST'
+    else:
+        return 'GET'
+
+~~~~
+
+## Template Rendering
+
+Inside of ```render_template()``` function we can provide multiple argument, for suppose here ```name``` argument is provided
+
+~~~~{.python}
+
+@app.route('/',methods=['GET'])
+def index():
+    if request.method == 'GET':
+        return render_template('index.html', name="Spondon")
+
+~~~~
+
+And to use this argument inside ```index.html```
+
+~~~~{.html}
+
+<body>
+{% if name %}
+    <h1>Hello {{ name }}!</h1> 
+{% else %}
+    <h1>Hello, World!</h1> 
+{% endif %}
+</body>
+
+~~~~
+
+
+
 
 
 
