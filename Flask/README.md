@@ -49,15 +49,15 @@ This does the following things:
 
 Use the ```route()``` decorator to bind a function to a URL.
 
-```
+~~~~{.python}
 @app.route('/')
 def index():
     return 'Index Page'
-```
+~~~~
 
 ### unique routes
 
-```
+~~~~{.python}
 @app.route('/projects/') # this is a decorator, A reference to a function "func" or a class "C" is passed to a decorator and the decorator returns a modified function or class
 def projects():
     return 'The project page'
@@ -85,7 +85,7 @@ def show_post(post_id):
     return 'Post %d' % post_id
 
 # similar types : float, path, uuid
-```
+~~~~
 
 
 
