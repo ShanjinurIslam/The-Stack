@@ -139,3 +139,38 @@ And to use this argument inside ```index.html```
 </body>
 
 ```
+
+## Request
+
+### Access Form Data
+
+To access form data (data transmitted in a ```POST``` or ```PUT``` request) you can use the ```form``` attribute. 
+
+```python
+@app.route('/login',methods=['GET','POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if validate_login(request.form['username'],request.form['password']): # x-www-form-urlencoded
+            return login_user(request.form['username'])
+        else:
+            error = 'Invalid User'
+
+    return render_template('login.htm',error=error)
+```
+
+```application/x-www-form-urlencoded``` - Represents an URL encoded form. This is the default value if ```enctype``` attribute is not set to anything.
+
+### Upload File
+
+You can handle uploaded files with Flask easily. Just make sure not to forget to set the ```enctype="multipart/ form-data"``` attribute on your HTML form, otherwise the browser will not transmit your files at all.
+
+```python
+@app.route('/upload',methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['profile_picture'] 
+        f.save('uploads/'+ f.filename) # file is saved inside /uploads directory
+        return "Upload complete",201 # Here 201 is status code of response
+```
+
