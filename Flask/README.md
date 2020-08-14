@@ -174,3 +174,66 @@ def upload_file():
         return "Upload complete",201 # Here 201 is status code of response
 ```
 
+## Cookies
+
+To access cookies you can use the ```cookies``` attribute. To set cookies you can use the ```set_cookie``` method of response objects. The ```cookies``` attribute of request objects is a ```dictionary``` with all the cookies the client transmits. If you want to use sessions, do not use the cookies directly but instead use the ```Sessions``` in Flask that add some security on top of cookies for you.
+
+### Set Cookie
+
+```python
+from flask import make_response
+
+@app.route('/') 
+def index():
+    resp = make_response(render_template('index.htm')) 
+    resp.set_cookie('username', 'the username') 
+    return resp
+```
+
+### Access Cookie
+```python
+@app.route('/username') 
+def get_username():
+    username = request.cookies.get('username')
+    # use cookies.get(key) instead of cookies[key] to not get a 
+    # KeyError if the cookie is missing.
+    if username:
+        return username,200
+    else:
+        return "Not Found",404
+```
+
+## Responses
+
+The return value from a view function is automatically converted into a response object for you. If the return value is a string it’s converted into a response object with the string as response body, a ```200 OK``` status code and a ```text/html``` mimetype. If the return value is a dict, ```jsonify()``` is called to produce a response. The logic that Flask applies to converting return values into response objects is as follows:
+
+1. If a response object of the correct type is returned it’s directly returned from the view.
+2. If it’s a string, a response object is created with that data and the default parameters.
+3. If it’s a dict, a response object is created using jsonify.
+
+### Error Handling
+
+```python
+@app.errorhandler(404) 
+def not_found(error):
+    return render_template('error.html'), 404
+```
+
+### Constructing API
+
+```
+@app.route('/api/get_user_details')
+def get_user_details():
+    user = {}
+    user['name'] = "Shanjinur"
+    user['token'] = "SecureText"
+
+    return user,200
+
+```
+
+As the object is ```dict``` flask will automatically convert it into ```json``` response.
+
+## Redirects
+
+## Sessions
