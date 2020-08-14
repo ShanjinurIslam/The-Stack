@@ -4,26 +4,26 @@
 
 ### Install Flask Binaries
 
-```
+```bash
 pip install Flask
 ```
 
 ### Create an environment
 
-```
+```bash
 python -m venv venv
 . venv/bin/activate
 ```
 
 ### Install ```virtualenv``` 
 
-```
+```bash
 sudo python -m pip install virtualenv
 ```
 
 ## Run Application
 
-```
+```bash
 export FLASK_APP=main.py
 flask run
 ```
@@ -32,7 +32,7 @@ flask run
 
  If you enable debug support the server will reload itself on code changes, and it will also provide you with a helpful debugger if things go wrong.
 
-```
+```bash
 export FLASK_ENV=development
 flask run
 ```
@@ -79,7 +79,7 @@ def about():
 
 ### Dynamic routes
 
-~~~~{.python}
+```python
 # (default) accepts any text without a slash
 @app.route('/user/<username>')
 def show_username(username):
@@ -94,12 +94,12 @@ def show_post(post_id):
     return 'Post %d' % post_id
 
 # similar types : float, path, uuid
-~~~~
+```
 
 
 ## HTTP Methods
 
-~~~~{.python}
+```python
 
 @app.route('/',methods=['GET'])
 def index():
@@ -111,25 +111,24 @@ def login():
         return 'POST'
     else:
         return 'GET'
-
-~~~~
+```
 
 ## Template Rendering
 
 Inside of ```render_template()``` function we can provide multiple argument, for suppose here ```name``` argument is provided
 
-~~~~{.python}
+```python
 
 @app.route('/',methods=['GET'])
 def index():
     if request.method == 'GET':
         return render_template('index.html', name="Spondon")
 
-~~~~
+```
 
 And to use this argument inside ```index.html```
 
-~~~~{.html}
+```html
 
 <body>
 {% if name %}
@@ -139,11 +138,4 @@ And to use this argument inside ```index.html```
 {% endif %}
 </body>
 
-~~~~
-
-
-
-
-
-
-
+```
