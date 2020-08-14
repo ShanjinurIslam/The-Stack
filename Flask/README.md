@@ -58,15 +58,15 @@ This does the following things:
 
 Use the ```route()``` decorator to bind a function to a URL.
 
-~~~~{.python}
+```python
 @app.route('/')
 def index():
     return 'Index Page'
-~~~~
+```
 
 ### Unique routes
 
-~~~~{.python}
+```python
 @app.route('/projects/') # this is a decorator, A reference to a function "func" or a class "C" is passed to a decorator and the decorator returns a modified function or class
 def projects():
     return 'The project page'
@@ -75,7 +75,6 @@ def projects():
 def about():
     return 'The about page'
 ```
-~~~~
 
 
 ### Dynamic routes
