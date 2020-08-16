@@ -1,0 +1,19 @@
+#reg_box {
+    align-items: center;
+    padding-left: 30%;
+    padding-top: 15%;
+    padding-right: 25%;
+}
+
+#username,
+#password {
+    width: 80%;
+}
+
+#logout_button {
+    margin: 10px;
+}
+
+#user {
+    margin-left: 5px;
+}

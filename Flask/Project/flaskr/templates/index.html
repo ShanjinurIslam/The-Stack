@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Posts</title>
-</head>
+{% block title %}
+Welcome to Posts
+{% endblock title %}
 
-<body>
+{% block navbar %}
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Posts</a>
     {% if  session%}
-        Logged in as {{session['username']}}[{{session['user_id']}}]
-    {% endif %}
-
-    <form action="/auth/logout" method="POST">
-        <button type="submit">Log out</button>
+    <form class="form-inline" action="/auth/logout" method="POST">
+        <small>Logged In as</small> <strong id="user">{{session['username']}} </strong>
+        <button id="logout_button" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
     </form>
-</body>
-
-</html>
+    {% endif %}
+</nav>
+{% endblock navbar %}

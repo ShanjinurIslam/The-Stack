@@ -63,7 +63,5 @@ def login():
 
 @bp.route('/logout', methods=['POST']) 
 def logout():
-    session.pop('user_id',None)
-    session.pop('username', None) 
     session.clear()
     return redirect(url_for('auth.login'))

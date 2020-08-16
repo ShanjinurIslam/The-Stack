@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask,render_template,session
+from flask import Flask,render_template,session,redirect,url_for
 
 def create_app(test_config=None):
     app = Flask(__name__,instance_relative_config=True)
@@ -31,6 +31,9 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/') 
     def index():
-        return render_template('index.html',session=session)
+        if session:
+            return render_template('index.html',session=session)
+        else:
+            return redirect(url_for('auth.login'))
         
     return app
