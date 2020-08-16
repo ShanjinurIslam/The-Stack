@@ -287,3 +287,34 @@ if 'username' in session:
 ```python
 session.pop('username', None) 
 ```
+
+## Blueprints
+
+A ```Blueprint``` is a way to organize a group of related views and other code. Rather than registering views and other code directly with an application, they are registered with a blueprint. Then the blueprint is registered with the application when it is available in the factory function.
+
+### Create instance of ```bp```
+```python
+from flask import Blueprint
+bp = Blueprint('auth', __name__, url_prefix='/auth')
+```
+
+### Register with ```app```
+
+```python
+app.register_blueprint(auth.bp)
+```
+
+### Add route to ```bp```
+
+```python
+@bp.route('/logout', methods=['POST']) 
+def logout():
+    session.pop('user_id',None)
+    session.pop('username', None) 
+    session.clear()
+    return redirect(url_for('auth.login'))
+```
+
+
+
+
