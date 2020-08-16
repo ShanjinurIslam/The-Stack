@@ -321,7 +321,7 @@ Templates are files that contain static data as well as placeholders for dynamic
 
 ```app``` will use templates to render ```HTML``` which will display in the user’s browser. In Flask, ```Jinja``` is configured to autoescape any data that is rendered in HTML templates. This means that it’s safe to render user input; any characters they’ve entered that could mess with the HTML, such as < and > will be escaped with safe values that look the same in the browser but don’t cause unwanted effects.
 
-```html
+```jinja
 <!DOCTYPE html>
 <html lang="en">
 

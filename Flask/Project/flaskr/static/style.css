@@ -5,8 +5,22 @@
     padding-right: 25%;
 }
 
+#post_box {
+    align-items: center;
+    padding-left: 30%;
+    padding-top: 10%;
+    padding-right: 25%;
+}
+
+#posts {
+    padding-top: 2.5%;
+    padding-left: 2.5%;
+}
+
 #username,
-#password {
+#password,
+#title,
+#body {
     width: 80%;
 }
 

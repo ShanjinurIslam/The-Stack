@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask,render_template,session,redirect,url_for
+from flask import Flask,render_template,session,redirect,url_for,g
+from flask_wtf.csrf import CSRFProtect
 
 def create_app(test_config=None):
     app = Flask(__name__,instance_relative_config=True)
@@ -24,16 +25,14 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
+    csrf = CSRFProtect()
+    csrf.init_app(app)
+
     from . import auth
     app.register_blueprint(auth.bp)
 
-    
-    # a simple page that says hello
-    @app.route('/') 
-    def index():
-        if session:
-            return render_template('index.html',session=session)
-        else:
-            return redirect(url_for('auth.login'))
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/',endpoint='index')
         
     return app

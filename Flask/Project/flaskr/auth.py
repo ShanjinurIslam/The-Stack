@@ -55,7 +55,7 @@ def login():
         if error is None: 
             session.clear()
             session['user_id'] = user['id']
-            session['username'] = username 
+            session['user_name'] = user['username']
             return redirect(url_for('index'))
 
     return render_template('auth/login.html')
